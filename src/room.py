@@ -13,7 +13,7 @@ class Room:
     
     
   def __repr__(self):
-        return f'{self.name} --- {self.description}'
+        return f'{self.name} - {self.description}'
       
       
   
