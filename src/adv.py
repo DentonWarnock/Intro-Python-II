@@ -40,8 +40,11 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player(input("What is your name hero?"), room["outside"])
+player = Player(input("What is your name hero?   "), room["outside"])
 print(f"\nWelcome {player.name}!")
+print("enter 'q' to quit anytime")
+print(f"\n{player.current_room}")
+
 
 # Write a loop that:
 #
@@ -54,23 +57,14 @@ print(f"\nWelcome {player.name}!")
 #
 # If the user enters "q", quit the game.
 
-# print(f"{player.current_room.description}")
 
-while True:
-    print(f"\n{player.current_room.name}")
-    print(f"- - - - - - - - - - - - - - - - -")
-    print(f"{player.current_room.description}")
-    print("Please choose a direction to travel: ")      
-    commands = ["n --> north", "e --> east", "s --> south", "w --> west", "or press 'q' to quit"]
-    # print all commands
-    for cmd in commands:
-        print(cmd)        
-    cmd = input("[ENTER: n, e, s, w, or q] --> ")
-    
+
+while True:    
+    cmd = input("---> ")
     if cmd == "q":
         print("\nThanks for playing! Goodbye!")
         break
-    elif cmd in ("n", "e", "s", "w"):
+    elif cmd in ("n", "s", "e", "w"):
         player.move(cmd)
     else:
         print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")   

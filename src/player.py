@@ -12,6 +12,7 @@ class Player:
   def move(self, direction):     
     if getattr(self.current_room, f"{direction}_to") is not None:
       self.current_room = getattr(self.current_room, f"{direction}_to")
+      print(self.current_room)
     else:
       print("\nYou shall not pass, try again!")
 
