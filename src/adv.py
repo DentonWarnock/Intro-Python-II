@@ -7,6 +7,7 @@ from item import Item
 
 torch = Item("torch", "wooden handle with burning fire on one end, carry this item to eluminate your surroundings")
 sword = Item("sword", "pointy on one end and used to poke things")
+book = Item("book", "old, dusty, and musty book")
 coins = Item("coins", "shiny gold coins, but you get the feeling something is not right about them...")
 
 # Declare all the rooms
@@ -20,7 +21,7 @@ passages run north and east.""", [torch]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", [book]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
