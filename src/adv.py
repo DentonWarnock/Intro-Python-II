@@ -2,14 +2,21 @@ from room import Room
 from player import Player
 from item import Item
 
+
+#Items
+
+torch = Item("torch", "wooden handle with burning fire on one end, carry this item to eluminate your surroundings")
+sword = Item("sword", "pointy on one end and used to poke things")
+coins = Item("coins", "shiny gold coins, but you get the feeling something is not right about them...")
+
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", [sword]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [torch]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -20,7 +27,7 @@ to north. The smell of gold permeates the air."""),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", [coins]),
 }
 
 
@@ -40,11 +47,11 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player = Player(input("What is your name hero?   "), room["outside"])
+player = Player(input("What is your name hero?   "), room['outside'])
 print(f"\nWelcome {player.name}!")
-print("enter 'q' to quit anytime")
-print(f"\n{player.current_room}")
-
+print("""Enter n, s, w, or e to travel in that direction, i to view your inventory, get/take/drop [item], or q to quit""")
+print(f"{player.current_room}")
+# print(f"\n{player.current_room.print_room_items()}")
 
 # Write a loop that:
 #
@@ -58,14 +65,35 @@ print(f"\n{player.current_room}")
 # If the user enters "q", quit the game.
 
 
-
 while True:    
-    cmd = input("---> ")
-    if cmd == "q":
-        print("\nThanks for playing! Goodbye!")
-        break
-    elif cmd in ("n", "s", "e", "w"):
-        player.move(cmd)
+    cmd = input("---> ").split()
+    if len(cmd) == 1:
+        cmd = cmd[0]
+        if cmd == "q":
+            print("\nThanks for playing {player.name}! Goodbye!")
+            break
+        elif cmd in ("n", "s", "e", "w"):
+            player.move(cmd)
+        elif cmd == "i" or cmd == "inventory":
+            print(player.print_inventory())
+        else:
+            print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")   
+    elif len(cmd) == 2:
+        verb = cmd[0]
+        item_name = cmd[1]
+        if verb == "get" or verb == "take":            
+            if player.current_room.has_item(item_name):
+                player.take_item(item_name)                
+            else:
+                print(f"There is no {item_name} in this room")
+        elif verb == "drop":
+            if player.has_item(item_name):                
+                player.drop_item(item_name)
+            else: print(f"There is no {item_name} in your inventory")
+        else:
+            print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")          
     else:
-        print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")   
+        print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")      
+        
+        
         
