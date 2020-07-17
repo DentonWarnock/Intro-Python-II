@@ -49,9 +49,10 @@ class Player:
         self.current_room.drop_item(item)   
         
   def has_item(self, item_name):
-    for i in self.item_names():
+    for i in self.item_names():      
       if i == item_name:
         return True
-      else:
-        return False
+    else:
+      return False
+    
 

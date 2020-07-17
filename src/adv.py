@@ -51,7 +51,6 @@ player = Player(input("What is your name hero?   "), room['outside'])
 print(f"\nWelcome {player.name}!")
 print("""Enter n, s, w, or e to travel in that direction, i to view your inventory, get/take/drop [item], or q to quit""")
 print(f"{player.current_room}")
-# print(f"\n{player.current_room.print_room_items()}")
 
 # Write a loop that:
 #
@@ -66,7 +65,7 @@ print(f"{player.current_room}")
 
 
 while True:    
-    cmd = input("---> ").split()
+    cmd = input("---> ").split(" ")
     if len(cmd) == 1:
         cmd = cmd[0]
         if cmd == "q":
@@ -77,7 +76,7 @@ while True:
         elif cmd == "i" or cmd == "inventory":
             print(player.print_inventory())
         else:
-            print(f"\n\n-------->    '{cmd}' is not a valid command! Please try again    <-------\n\n")   
+            print(f"\n\n-------->'{cmd}' is not a valid command! Please try again    <-------\n\n")   
     elif len(cmd) == 2:
         verb = cmd[0]
         item_name = cmd[1]
